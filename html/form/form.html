@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Element</title>
+  </head>
+  <body>
+    <!-- 
+        表单作用：填写数据，提交保存 
+        组成：一个个表单控件
+    -->
+    <form
+      autocomplete
+      name="demoForm"
+      id="demoForm"
+      action="http://192.168.8.41/views/frame/frame.html"
+      enctype="text/plain"
+      method="post"
+      target="_self"
+    >
+      <!-- 
+            按钮控件:
+            如果你的按钮不是用于向服务器提交数据，请确保这些按钮的 type 属性设置成 button。
+            否则它们被按下后将会向服务器发送数据并加载（可能并不存在的）响应内容，因而可能会破坏当前文档的状态。
+        -->
+      <button
+        autofocus
+        form="demoForm"
+        name="提交按钮"
+        type="submit"
+        value="提交按钮"
+      >
+        按钮
+      </button>
+
+      <input list="datalist" name="datalist" />
+      <datalist id="datalist">
+        <option value="Chrome"></option>
+        <option value="Firefox"></option>
+        <option value="IE"></option>
+      </datalist>
+
+      <!-- 表单分组 -->
+      <fieldset disabled form="demoForm" name="group1">
+        <!-- 分组标题 -->
+        <legend>分组标题</legend>
+
+        <input list="datalist2" name="datalist" />
+        <datalist id="datalist2">
+          <option value="Chrome"></option>
+          <option value="Firefox"></option>
+          <option value="IE"></option>
+        </datalist>
+      </fieldset>
+
+      <!-- input 标签 -->
+      <input type="text" name="text" />
+      <!-- 使用 button 代替 -->
+      <input
+        type="button"
+        value="input-button"
+        onclick="alert('input-button')"
+      />
+      <input type="checkbox" name="checkbox" checked value="checkbox-value" />
+      <!-- value 属性值必须是16进制值 -->
+      <input type="color" name="color" autocomplete autofocus value="#FF0000" />
+      <!-- 
+          日期值格式必须为 yyyy-mm-dd
+          min、max 限制日期选择范围
+     -->
+      <input
+        type="date"
+        name="date"
+        value="2020-01-01"
+        min="2020-01-01"
+        max="2020-01-22"
+      />
+
+      <!-- value 格式必须为 yyyy-MM-ddThh:mm -->
+      <input
+        type="datetime-local"
+        name="datetime-local"
+        value="2020-01-01T22:33"
+        min=""
+        max=""
+      />
+
+      <!-- multiple: 可输入多个邮箱地址，用逗号分隔 -->
+      <input type="email" name="email" multiple />
+
+      <!-- accept: 规定可选择文件的类型  -->
+      <input type="file" name="file" multiple accept=".sql" />
+
+      <input type="hidden" name="hidden" />
+
+      <input type="image" src="/image/no-data.png" alt="image" />
+
+      <!-- value 格式：yyyy-MM -->
+      <input type="month" name="month" min="" max="" value="2021-01" />
+
+      <input
+        type="number"
+        name="number"
+        value="20"
+        step="0.1"
+        min="20"
+        max="20.3"
+        list="datalist element id"
+      />
+
+      <input type="password" name="password" />
+
+      <!-- 一个单选按钮组，由具有相同 name 的 radio 标签组成 -->
+      <input type="radio" name="radio" value="西瓜" checked /> 西瓜
+      <input type="radio" name="radio" value="苹果" /> 苹果
+      <input type="radio" name="radio" value="香蕉" /> 香蕉
+      <input type="radio" name="radio" value="草莓" /> 草莓
+
+      <!-- 
+          min 默认为0
+          max 默认为100
+          value 默认为50 
+      -->
+      0
+      <input type="range" name="range" min="0" max="100" step="1" value="50" />
+      100
+
+      <!-- 
+          可搭配 datalist 实现刻度 
+          目前没有浏览器完全支持这些特性。例如，Firefox根本不支持散列标记和标签，而Chrome支持散列标记，但不支持标签。
+          Chrome的66版本(66.0.3359.181)支持标签，但是 <datalist> 标签必须使用CSS样式，因为它的 display属性默认设置为 none ，隐藏了标签。
+        -->
+      <input type="range" list="tickmarks" />
+      <datalist id="tickmarks">
+        <option value="0" label="0%"></option>
+        <option value="10"></option>
+        <option value="20"></option>
+        <option value="30"></option>
+        <option value="40"></option>
+        <option value="50" label="50%"></option>
+        <option value="60"></option>
+        <option value="70"></option>
+        <option value="80"></option>
+        <option value="90"></option>
+        <option value="100" label="100%"></option>
+      </datalist>
+
+      <input type="reset" value="重置" />
+
+      <input
+        type="search"
+        name="q"
+        minlength="0"
+        maxlength="5"
+        pattern="w"
+        spellcheck="true"
+      />
+
+      <input type="submit" value="提交" />
+
+      <input type="tel" name="tel" />
+
+      <!-- value格式：hh:mm or hh:mm:ss -->
+      <input type="time" name="time" value="12:00:44" max="" min="" />
+
+      <input type="url" name="url" />
+
+      <!-- value 格式：yyyy-Www -->
+      <input type="week" name="week" value="2021-W01" max="" min="" />
+
+      <label>
+        label
+        <input type="text" name="label1" />
+      </label>
+
+      <!-- 
+          label for 属性值 = 关联表单元素的 id 属性值 
+          一个表单元素可以对应多个标签
+        -->
+      <label for="label2">label</label>
+      <input type="text" name="label2" id="label2" />
+
+      <meter min="0" max="100" low="30" high="70" value="55">meter</meter>
+
+      <select name="select">
+        <option value="123" label="123"></option>
+        <option value="1234">1234</option>
+        <option value="1235" label="1235"></option>
+      </select>
+      <!-- 多选 -->
+      <select name="select" multiple size="5">
+        <option value="123" label="123"></option>
+        <option value="1234">1234</option>
+        <option value="1235" label="1235"></option>
+      </select>
+      <!-- option 分组 -->
+      <select name="select">
+        <optgroup label="数字">
+          <option value="123" label="123"></option>
+          <option value="1234">1234</option>
+          <option value="1235" label="1235"></option>
+        </optgroup>
+        <optgroup label="字符串">
+          <option value="草莓">草莓</option>
+        </optgroup>
+      </select>
+
+      <textarea name="textarea" cols="30" rows="10">textarea</textarea>
+      <br />
+
+      x <input type="text" name="x" oninput="output.value=x.value+y.value" /> +
+      y <input type="text" name="y" oninput="output.value=x.value+y.value" /> =
+      <output name="output"></output>
+
+      <progress max="100" value="40"></progress>
+    </form>
+  </body>
+</html>
