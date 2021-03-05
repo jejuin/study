@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Demo</title>
+  </head>
+  <body>
+    <!-- 刷新视频加载页面，就不会在自动播放了 -->
+    <video
+      id="video"
+      src="/video/拖拉拽及流程示范.mp4"
+      width="400px"
+      height="400px"
+      controls
+      loop
+      poster="/image/no-data.png"
+      muted
+    >
+      <!-- 
+          浏览器并不是都支持相同的视频格式，所以你可以在 <source> 元素里提供多个视频源，然后浏览器将会使用它所支持的第一个源。
+          每个 <source> 标签页含有一个 type 属性，这个属性是可选的，但是建议你添加上这个属性 — 它包含了视频文件的 MIME types ，
+          同时浏览器也会通过检查这个属性来迅速的跳过那些不支持的格式。如果你没有添加 type 属性，浏览器会尝试加载每一个文件，
+          直到找到一个能正确播放的格式，这样会消耗掉大量的时间和资源。 
+        -->
+      <source src="/video/拖拉拽及流程示范.mp4" type="video/mp4" />
+      <source src="" type="video/webm" />
+      <!-- 在 <video></video> 标签中间的内容，是针对浏览器不支持此元素时候的降级处理。 -->
+      Sorry, your browser doesn't support embedded videos.
+    </video>
+    <script>
+      const video = document.getElementById("video");
+
+      // 播放视频
+      video.play();
+
+      // 暂停视频
+      setTimeout(() => {
+        video.pause();
+      }, 1000);
+
+      // 设置 video 全屏播放
+      // https://developer.mozilla.org/zh-CN/docs/Web/API/Element/requestFullScreen#%E5%BC%82%E5%B8%B8
+      // 因为功能策略限制配置或其他访问控制，元素可能不被允许使用"fullscreen"功能。
+      // chrome 不允许使用该功能
+      //   video.requestFullscreen();
+      video.webkitRequestFullscreen();
+
+      // 重新加载视频
+      //   video.load();
+
+      // 返回视频的总长度
+      console.log(video.duration);
+
+      // 设置或返回当前视频的长度
+      console.log(video.currentTime);
+
+      // 设置或返回视频的来源
+      console.log(video.src);
+
+      // 设置或返回视频的音量
+      console.log(video.volume);
+
+      // 设置或返回视频是否设置了控件 true or false
+      console.log(video.controls);
+
+      // 设置或返回视频是否静音 true or false
+      console.log(video.muted);
+
+      // 返回视频的当前网络状态
+      // 0 : 未初始化
+      // 1 : 视频已经选取好资源，但是未使用网络
+      // 2 : 浏览器正在下载视频资源
+      // 3 : 未找到视频资源（在一开始，因为 video 不会立即找到资源，所以也会出现这个状态码）
+      console.log(video.networkState);
+
+      // 返回当前视频的 URL（必须是在视频可以加载播放的时候，才能返回，不能赋值）
+      console.log(video.currentSrc);
+
+      // 返回视频的播放是否结束
+      console.log(video.ended);
+
+      // 设置或返回视频是否设置了循环播放 true or false
+      console.log(video.loop);
+
+      // 设置或返回视频播放的速度
+      console.log(video.playbackRate);
+
+      // 返回当前视频的就绪状态
+      // 0 没有关于视频就绪的信息
+      // 1 有数据，但是快不足以支撑了
+      // 2 当前的数据可以用，但是没有数据来播放下一帧了
+      // 3 数据正在缓存，当前及至少下一帧是可用的
+      // 4 可用数据足以开始播放
+      console.log(video.readyState);
+
+      // timeupdate 事件：监听视频播放状态
+      video.addEventListener("timeupdate", (event) => {
+        console.log("The currentTime attribute has been updated. Again.");
+      });
+
+      // seeked 事件：用户已移动/跳跃到指定进度条位置时触发
+      video.addEventListener("seeked", (event) => {
+        console.log("Video found the playback position it was looking for.");
+      });
+
+      // seeked 事件：seek 动作开始触发
+      video.addEventListener("seeking", (event) => {
+        console.log("Video is seeking a new position.");
+      });
+
+      // volumechange 事件：音量改变时触发
+      video.addEventListener("volumechange", (event) => {
+        console.log("The volume changed.");
+      });
+
+      // canplay 视频可以开始播放时触发该事件
+      video.addEventListener("canplay", (event) => {
+        console.log("Video can start, but not sure it will play through.");
+      });
+    </script>
+  </body>
+</html>
